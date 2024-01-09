@@ -15,7 +15,7 @@ function PokemonCardsList(props) {
     const [showLoadButton, setShowLoadButton] = useState(true);
     let lastPokemonId = 0;
 
-    useEffect(() => { isButtonUp() }, [props,isButtonUp, pokemonCount]);
+    useEffect(() => { isButtonUp() });
 
     // function to create pokemoncards component list
     function cardsList() {
