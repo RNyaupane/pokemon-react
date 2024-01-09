@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 
 import './PokemonCards.css';
 
-import { correctId } from '../utilities/functions';
 
 function PokemonCards(props) {
 
