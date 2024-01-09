@@ -41,15 +41,18 @@ function SearchedPokemonCardsList(props) {
         if (props.pokemonList.length === 0) {
             return <NotFound />;
         } else {
-            const list = props.pokemonList.map(pokemon => (
-                checkFilter(pokemon) ? (
-                    <PokemonCards
-                        key={'pokemonid-' + pokemon.name}
-                        name={pokemon.name}
-                        url={pokemon.url}
-                    />
-                ) : null
-            ));
+            const list = props.pokemonList.map((pokemon) => {
+                return (
+                    checkFilter(pokemon) ? (
+                        <PokemonCards
+                            key={'pokemonid-' + pokemon.name}
+                            name={pokemon.name}
+                            url={pokemon.url}
+                        />
+                    ) : null
+                )
+
+            });
 
             return list;
         }
