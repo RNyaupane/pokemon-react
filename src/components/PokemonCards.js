@@ -23,11 +23,8 @@ function PokemonCards(props) {
 
 
     function findPokemonType(types) {
-        const types_arr = [];
 
-        types.map(type => {
-            types_arr.push(type.type.name);
-        })
+        const types_arr = types.map((type) => type.type.name);
 
         return types_arr;
     }
@@ -49,7 +46,7 @@ function PokemonCards(props) {
                     },
                 })
             });
-    }, [])
+    }, [props])
     const capitalizeFirstLetter = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };

@@ -23,17 +23,17 @@ function SearchBar(props) {
 
     useEffect(() => {
         props.onSearching(searchInput, false);
-    }, [props,searchInput])
+    }, [props, searchInput])
 
     useEffect(() => {
         props.onSearching(searchInput, true)
-    }, [props,filteredPokemonList])
+    }, [props, searchInput, filteredPokemonList])
 
     useEffect(() => {
         setTimeout(() => {
             filterSearch();
         }, "100");
-    }, [props,searchInput]);
+    }, [props, filterSearch, searchInput]);
 
 
     return (

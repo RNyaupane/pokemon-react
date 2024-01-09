@@ -15,7 +15,7 @@ function PokemonCardsList(props) {
     const [showLoadButton, setShowLoadButton] = useState(true);
     let lastPokemonId = 0;
 
-    useEffect(() => { isButtonUp() }, [props, pokemonCount]);
+    useEffect(() => { isButtonUp() }, [props,isButtonUp, pokemonCount]);
 
     // function to create pokemoncards component list
     function cardsList() {
@@ -23,15 +23,18 @@ function PokemonCardsList(props) {
         const list = props.fullPokemonList.map(pokemon => {
             if (checkFilter(pokemon.url, config_values.REGIONS, props.regionFilter) && count < pokemonCount) {
                 count += 1;
-                lastPokemonId = (getIdFromUrl(pokemon.url));
-                return <PokemonCards
-                    key={'pokemonid-' + pokemon.name}
-                    name={pokemon.name}
-                    url={pokemon.url}
-                />
+                lastPokemonId = getIdFromUrl(pokemon.url);
+                return (
+                    <PokemonCards
+                        key={'pokemonid-' + pokemon.name}
+                        name={pokemon.name}
+                        url={pokemon.url}
+                    />
+                );
             }
+            return null; // Add this line to satisfy the return requirement
         });
-
+        
         return list;
     }
 
