@@ -5,14 +5,12 @@ function SearchBar(props) {
     const [filteredPokemonList, setFilteredPokemonList] = useState([]);
 
     function filterSearch() {
-        const filteredResults = [];
-
-        props.fullPokemonList.map(pokemon => {
+        const filteredResults = props.fullPokemonList.filter(pokemon => {
             if (pokemon.name.length > searchInput.length) {
                 const pokemonNameSubstring = pokemon.name.slice(0, searchInput.length);
-                if (pokemonNameSubstring === searchInput)
-                    filteredResults.push(pokemon);
+                return pokemonNameSubstring === searchInput;
             }
+            return false;
         });
 
         setFilteredPokemonList(filteredResults);
