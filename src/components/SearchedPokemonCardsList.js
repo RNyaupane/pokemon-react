@@ -5,24 +5,24 @@ import config_values from '../utilities/config';
 import PokemonCards from "./PokemonCards";
 
 
-function SearchedPokemonCardsList(props){
-    function findIdUsingURL(url){
-        const id = url.substring(34, url.length-1);
+function SearchedPokemonCardsList(props) {
+    function findIdUsingURL(url) {
+        const id = url.substring(34, url.length - 1);
         return parseInt(id);
     }
 
-    function checkFilter(pokemon){
-        if(props.regionFilter === 'none')
+    function checkFilter(pokemon) {
+        if (props.regionFilter === 'none')
             return true;
 
         const id = findIdUsingURL(pokemon.url);
-        for(let region in config_values.REGIONS){
+        for (let region in config_values.REGIONS) {
             const regionName = config_values.REGIONS[region].name;
-            if(regionName === props.regionFilter){
+            if (regionName === props.regionFilter) {
                 const start = config_values.REGIONS[region].startId;
                 const end = config_values.REGIONS[region].endId;
 
-                if(id >= start && id <= end)
+                if (id >= start && id <= end)
                     return true;
                 else
                     return false;
@@ -32,39 +32,39 @@ function SearchedPokemonCardsList(props){
 
     function NotFound() {
         return (
-          <div className='p-2 flex justify-center w-[inherit]'>
-            Not Found&nbsp;&nbsp;&nbsp; : (
-          </div>
+            <div className='p-2 flex justify-center w-[inherit]'>
+                Not Found&nbsp;&nbsp;&nbsp; : (
+            </div>
         );
-      }
-      
-      function cardsList() {
+    }
+    function cardsList() {
         if (props.pokemonList.length === 0) {
-          return <NotFound />;
+            return <NotFound />;
         } else {
-          const list = props.pokemonList.map(pokemon => {
-            if (checkFilter(pokemon)) {
-              return <PokemonCards
-                key={'pokemonid-' + pokemon.name}
-                name={pokemon.name}
-                url={pokemon.url}
-              />;
-            }
-          });
-      
-          return list;
-        }
-      }
-      
+            const list = props.pokemonList.map(pokemon => (
+                checkFilter(pokemon) ? (
+                    <PokemonCards
+                        key={'pokemonid-' + pokemon.name}
+                        name={pokemon.name}
+                        url={pokemon.url}
+                    />
+                ) : null
+            ));
 
-    return(
-        <div className = 'flex flex-col items-center justify-center my-5'>
+            return list;
+        }
+    }
+
+
+
+    return (
+        <div className='flex flex-col items-center justify-center my-5'>
             <div className='pokemonCardsList rounded-md grid grid-cols-1 md:grid-cols-3'>
-                { 
+                {
                     cardsList()
                 }
             </div>
-        </div>    
+        </div>
     )
 }
 
